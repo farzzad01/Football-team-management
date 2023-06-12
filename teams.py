@@ -206,7 +206,12 @@ class Team:
 
         return None
 
-    
+    def get_players_nationality(self):
+        nationalities = []
+        for player in self.players:
+            nationalities.append(player.nationality)
+        return nationalities
+
 
 class League:
     def __init__(self):
