@@ -418,6 +418,20 @@ class League:
                     player_with_most_passes = player
 
         return player_with_most_passes
+    
+    def get_player_with_most_shots_on_goal(self):
+        player_with_most_shots = None
+        max_shots = 0
+
+        for team in self.teams:
+            for player in team.players:
+                if player.shot > max_shots:
+                    max_shots = player.shot
+                    player_with_most_shots = player
+
+        return player_with_most_shots
+    
+
 
 league = League()
 team = Team()
@@ -455,5 +469,14 @@ player_with_most_passes = league.get_player_with_most_passes()
 if player_with_most_passes is not None:
     print(f"The player with the most passes is {player_with_most_passes.fname} {player_with_most_passes.lname}.")
     print(f"Passes made: {player_with_most_passes.passes}")
+else:
+    print("No players have been added to the league.")
+
+
+player_with_most_shots = league.get_player_with_most_shots_on_goal()
+
+if player_with_most_shots is not None:
+    print(f"The player with the most shots on goal is {player_with_most_shots.fname} {player_with_most_shots.lname}.")
+    print(f"Shots on goal: {player_with_most_shots.shot}")
 else:
     print("No players have been added to the league.")
