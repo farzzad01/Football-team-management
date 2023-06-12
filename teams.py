@@ -64,6 +64,7 @@ class Player(Person):
             else:
                 print("Invalid position. Please choose one of the following: attack, midfielder, defense, goalkeeper.")
     
+
     def read_stats(self):
         if self.post.lower() == "attack":
             self.goal = int(input("Enter the number of goals scored this season: "))
@@ -85,6 +86,7 @@ class Player(Person):
             self.clean_sheets = int(input("Enter the number of clean sheets made this season: "))
    
    
+
     def read_goal(self):
         self.goal = input('enter player goals')
     
@@ -101,6 +103,7 @@ class Player(Person):
             self.is_foreign = True
 
 
+
     def read_palyer_info(self):
         self.read_fname()
         self.read_lname()
@@ -112,6 +115,7 @@ class Player(Person):
         self.read_post()
         self.read_stats()
         
+
 
     def show_player_info(self):
         super().show_fullname()
@@ -138,7 +142,6 @@ class Player(Person):
         elif self == self.team.captain:
             print('Captain')
         
-
 
 
 
