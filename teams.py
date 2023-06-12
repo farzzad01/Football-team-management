@@ -395,7 +395,18 @@ class League:
 
         return team_with_most_foreign_players
 
+    def get_player_with_most_goals(self):
+        player_with_most_goals = None
+        max_goals = 0
 
+        for team in self.teams:
+            for player in team.players:
+                if player.goal > max_goals:
+                    max_goals = player.goal
+                    player_with_most_goals = player
+
+        return player_with_most_goals
+    
 
 league = League()
 team = Team()
@@ -418,4 +429,13 @@ league.display_players_over_30()
 league.display_coaches_with_teams()
 
 team.player_statistics()
+
+player_with_most_goals = league.get_player_with_most_goals()
+
+if player_with_most_goals is not None:
+    print(f"The player with the most goals is {player_with_most_goals.fname} {player_with_most_goals.lname}.")
+    print(f"Goals scored: {player_with_most_goals.goal}")
+else:
+    print("No players have been added to the league.")
+
 
