@@ -187,7 +187,25 @@ class Team:
         return False
 
 
-   
+    def choose_captain(self):
+        if self.players:
+            print("Select the captain from the following players:")
+            for i, player in enumerate(self.players):
+                print(f"{i+1}. {player.fname} {player.lname}")
+            
+            choice = int(input("Enter the number of the chosen captain: "))
+            
+            if 1 <= choice <= len(self.players):
+                captain = self.players[choice - 1]
+                print(f"{captain.fname} {captain.lname} is the captain of {self.team_name}.")
+                return captain
+            else:
+                print("Invalid choice. Please try again.")
+        else:
+            print("No players in the team. Cannot choose a captain.")
+
+        return None
+
     
 
 class League:
