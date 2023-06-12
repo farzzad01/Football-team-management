@@ -59,6 +59,7 @@ class Player(Person):
         self.is_foreign = False
         self.has_card = False
         self.num_cards = 0
+        self.num_foul = 0
         
 
     
@@ -77,19 +78,28 @@ class Player(Person):
         if self.post.lower() == "attack":
             self.goal = int(input("Enter the number of goals scored this season: "))
             self.shot = int(input("Enter the number of successful shots this season: "))
+
         elif self.post.lower() == "midfielder":
             self.passes = int(input("Enter the number of passes made this season: "))
             self.shot = int(input("Enter the number of successful shots this season: "))
+
             choice = input("Did the player score a goal this season? (y/n): ")
             if choice == 'y':
                 self.goal= int(input('how many goals? '))
+
+            choice = input("Did he make a foul on the opponent?? (y/n): ")
+            if choice == 'y':
+                self.goal= int(input('how many fouls? '))
+
         elif self.post.lower() == "defense":
+            self.num_foul = int(input("Enter the number of times the opponent has been fouled "))
             self.ball_taken = int(input("Enter the number of times the ball was taken from opponents: "))
             self.passes_given = int(input("Enter the number of passes given to team mates: "))
             card_option = input("Did the player receive a card this season? (y/n): ")
             if card_option == "y":
                 self.has_card = True
                 self.num_cards = int(input("Enter the number of cards received: "))
+
         elif self.post.lower() == "goalkeeper":
             self.clean_sheets = int(input("Enter the number of clean sheets made this season: "))
    
@@ -455,6 +465,20 @@ class League:
 
             return goalkeeper_with_most_clean_sheets
 
+    def get_team_with_most_fouls(self):
+            max_fouls = 0
+            fouling_team = None
+
+            for team in self.teams:
+                total_fouls = 0
+                for player in team.players:
+                    total_fouls += player.fouls
+
+                if total_fouls > max_fouls:
+                    max_fouls = total_fouls
+                    fouling_team = team
+
+            return fouling_team
 
 
 
@@ -476,6 +500,7 @@ while True:
     print("11. Player with most passes")
     print("12. Player with most shots on goal")
     print("13. Team with goalkeeper with most clean sheets")
+    print('14. The most violent team')
     print("0. Exit")
 
     choice = input("Enter your choice: ")
@@ -498,6 +523,8 @@ while True:
         league.display_coaches_with_teams()
     elif choice == "9":
         Team.player_statistics()
+
+    
     elif choice == "10":
         player_with_most_goals = league.get_player_with_most_goals()
         if player_with_most_goals is not None:
@@ -527,6 +554,16 @@ while True:
             print(f"Clean sheets: {team_with_most_clean_sheets.goalkeeper.clean_sheets}")
         else:
             print("No goalkeepers have been added to the league.")
+    
+    elif choice == "14":
+        team_with_most_fouls = league.get_team_with_most_fouls()
+        if team_with_most_fouls is not None:
+            print(f"The team with the most fouls is {team_with_most_fouls.name}.")
+            print(f"Total fouls: {team_with_most_fouls.get_total_fouls()}")
+        else:
+            print("No teams or players have been added to the league.")
+            
+    
     elif choice == "0":
         print("Exiting the program.")
         break
