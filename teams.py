@@ -431,6 +431,21 @@ class League:
 
         return player_with_most_shots
     
+    
+    def get_goalkeeper_with_most_clean_sheets(self):
+            goalkeeper_with_most_clean_sheets = None
+            max_clean_sheets = 0
+
+            for team in self.teams:
+                for player in team.players:
+                    if isinstance(player, Goalkeeper) and player.clean_sheets > max_clean_sheets:
+                        max_clean_sheets = player.clean_sheets
+                        goalkeeper_with_most_clean_sheets = player
+
+            return goalkeeper_with_most_clean_sheets
+
+
+
 
 
 league = League()
@@ -480,3 +495,12 @@ if player_with_most_shots is not None:
     print(f"Shots on goal: {player_with_most_shots.shot}")
 else:
     print("No players have been added to the league.")
+
+team_with_most_clean_sheets = league.get_team_with_goalkeeper_most_clean_sheets()
+
+if team_with_most_clean_sheets is not None:
+    print(f"The team with the goalkeeper who has the most clean sheets is {team_with_most_clean_sheets.name}.")
+    print(f"Goalkeeper: {team_with_most_clean_sheets.goalkeeper.fname} {team_with_most_clean_sheets.goalkeeper.lname}")
+    print(f"Clean sheets: {team_with_most_clean_sheets.goalkeeper.clean_sheets}")
+else:
+    print("No goalkeepers have been added to the league.")
