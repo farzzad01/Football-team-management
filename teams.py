@@ -452,58 +452,75 @@ class League:
 
 
 league = League()
-team = Team()
 
+while True:
+    print("========== League Menu ==========")
+    print("1. Read team information")
+    print("2. Display all teams")
+    print("3. Display team by code")
+    print("4. Display team by coach")
+    print("5. Display team by player")
+    print("6. Display players by name")
+    print("7. Display players over 30")
+    print("8. Display coaches with teams")
+    print("9. Player statistics")
+    print("10. Player with most goals")
+    print("11. Player with most passes")
+    print("12. Player with most shots on goal")
+    print("13. Team with goalkeeper with most clean sheets")
+    print("0. Exit")
 
-league.read_team_info()
+    choice = input("Enter your choice: ")
 
-league.display_all_teams()
-
-league.display_team_by_code()
-
-league.display_team_by_coach()
-
-league.display_team_by_player()
-
-league.display_players_by_name()
-
-league.display_players_over_30()
-
-league.display_coaches_with_teams()
-
-team.player_statistics()
-
-player_with_most_goals = league.get_player_with_most_goals()
-
-if player_with_most_goals is not None:
-    print(f"The player with the most goals is {player_with_most_goals.fname} {player_with_most_goals.lname}.")
-    print(f"Goals scored: {player_with_most_goals.goal}")
-else:
-    print("No players have been added to the league.")
-
-
-player_with_most_passes = league.get_player_with_most_passes()
-
-if player_with_most_passes is not None:
-    print(f"The player with the most passes is {player_with_most_passes.fname} {player_with_most_passes.lname}.")
-    print(f"Passes made: {player_with_most_passes.passes}")
-else:
-    print("No players have been added to the league.")
-
-
-player_with_most_shots = league.get_player_with_most_shots_on_goal()
-
-if player_with_most_shots is not None:
-    print(f"The player with the most shots on goal is {player_with_most_shots.fname} {player_with_most_shots.lname}.")
-    print(f"Shots on goal: {player_with_most_shots.shot}")
-else:
-    print("No players have been added to the league.")
-
-team_with_most_clean_sheets = league.get_team_with_goalkeeper_most_clean_sheets()
-
-if team_with_most_clean_sheets is not None:
-    print(f"The team with the goalkeeper who has the most clean sheets is {team_with_most_clean_sheets.name}.")
-    print(f"Goalkeeper: {team_with_most_clean_sheets.goalkeeper.fname} {team_with_most_clean_sheets.goalkeeper.lname}")
-    print(f"Clean sheets: {team_with_most_clean_sheets.goalkeeper.clean_sheets}")
-else:
-    print("No goalkeepers have been added to the league.")
+    if choice == "1":
+        league.read_team_info()
+    elif choice == "2":
+        league.display_all_teams()
+    elif choice == "3":
+        league.display_team_by_code()
+    elif choice == "4":
+        league.display_team_by_coach()
+    elif choice == "5":
+        league.display_team_by_player()
+    elif choice == "6":
+        league.display_players_by_name()
+    elif choice == "7":
+        league.display_players_over_30()
+    elif choice == "8":
+        league.display_coaches_with_teams()
+    elif choice == "9":
+        Team.player_statistics()
+    elif choice == "10":
+        player_with_most_goals = league.get_player_with_most_goals()
+        if player_with_most_goals is not None:
+            print(f"The player with the most goals is {player_with_most_goals.fname} {player_with_most_goals.lname}.")
+            print(f"Goals scored: {player_with_most_goals.goal}")
+        else:
+            print("No players have been added to the league.")
+    elif choice == "11":
+        player_with_most_passes = league.get_player_with_most_passes()
+        if player_with_most_passes is not None:
+            print(f"The player with the most passes is {player_with_most_passes.fname} {player_with_most_passes.lname}.")
+            print(f"Passes made: {player_with_most_passes.passes}")
+        else:
+            print("No players have been added to the league.")
+    elif choice == "12":
+        player_with_most_shots = league.get_player_with_most_shots_on_goal()
+        if player_with_most_shots is not None:
+            print(f"The player with the most shots on goal is {player_with_most_shots.fname} {player_with_most_shots.lname}.")
+            print(f"Shots on goal: {player_with_most_shots.shot}")
+        else:
+            print("No players have been added to the league.")
+    elif choice == "13":
+        team_with_most_clean_sheets = league.get_team_with_goalkeeper_most_clean_sheets()
+        if team_with_most_clean_sheets is not None:
+            print(f"The team with the goalkeeper who has the most clean sheets is {team_with_most_clean_sheets.name}.")
+            print(f"Goalkeeper: {team_with_most_clean_sheets.goalkeeper.fname} {team_with_most_clean_sheets.goalkeeper.lname}")
+            print(f"Clean sheets: {team_with_most_clean_sheets.goalkeeper.clean_sheets}")
+        else:
+            print("No goalkeepers have been added to the league.")
+    elif choice == "0":
+        print("Exiting the program.")
+        break
+    else:
+        print("Invalid choice. Please try again.\n")
