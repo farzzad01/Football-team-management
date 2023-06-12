@@ -290,7 +290,11 @@ class Team:
         return nationalities
     
 
- 
+    def player_statistics(self):
+        for i, player in enumerate(self.players):
+            print("\nPlayer", i+1, "Info:")
+            player.show_player_info()
+            print("\n---------------------------")
 
 
 class League:
