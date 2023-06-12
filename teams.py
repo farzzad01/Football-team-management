@@ -41,7 +41,16 @@ class Player(Person):
         self.height = []
         self.weight = []
         self.nationality = []
-       
+        self.goal = 0
+        self.passes = 0
+        self.scored_goal = False
+        self.ball_taken = 0
+        self.passes_given = 0
+        self.clean_sheets = 0
+        self.shot = 0
+        self.is_foreign = False
+        self.has_card = False
+        self.num_cards = 0
         
 
     
