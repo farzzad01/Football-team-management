@@ -109,10 +109,28 @@ class Player(Person):
         self.goal = input('enter player goals')
     
     def read_height(self):
-        self.height = input("Enter player's height: ")
+        while True:
+            try:
+                height = int(input("Enter height : "))
+                if 160 <= height <= 210:
+                    self.height = height
+                    break
+                else:
+                    print("The height should be between 160 and 210.")
+            except ValueError:
+                print("Invalid input.")
 
     def read_weight(self):
-        self.weight = input("Enter player's weight: ")
+        while True:
+            try:
+                weight = int(input("Enter weight : "))
+                if 50 <= weight <= 110:
+                    self.weight = weight
+                    break
+                else:
+                    print("The weight should be between 50 and 110.")
+            except ValueError:
+                print("Invalid input.")
 
     def read_nationality(self):
         self.nationality = input("Enter player's nationality: ")
