@@ -146,7 +146,18 @@ class Coach(Person):
         super().__init__()
         self.card_type = []
 
-    
+    def read_card_and_ranking(self):
+        valid_cards = ["A", "B", "C"]
+        while True:
+            card = input("Enter the coaching card type (A/B/C): ")
+            if card.upper() in valid_cards:
+                self.card_type = card.upper()
+                break
+            else:
+                print("Invalid coaching card type. Please choose one of the following: A, B, C.")
+
+        self.team_ranking = int(input("Enter the team's ranking: "))
+
     def show_card_type(self):
         print("Card type:", self.card_type)
     
