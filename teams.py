@@ -33,6 +33,9 @@ class Player(Person):
         super().__init__()
         self.post = []
         self.goal = []
+        self.height = []
+        self.weight = []
+        self.nationality = []
 
     def read_post(self):
         self.post = input("Enter player's post: ")
@@ -42,12 +45,25 @@ class Player(Person):
     
     def read_goal(self):
         self.goal = input('enter player goals')
+    
+    def read_height(self):
+        self.height = input("Enter player's height: ")
+
+    def read_weight(self):
+        self.weight = input("Enter player's weight: ")
+
+    def read_nationality(self):
+        self.nationality = input("Enter player's nationality: ")
 
     def show_player_info(self):
         super().show_fullname()
         super().show_idcode()
         super().show_birthdate()
         print("post:", self.post)
+        print("Height:", self.height)
+        print("Weight:", self.weight)
+        print("Nationality:", self.nationality)
+
     
     def read_palyer_info(self):
         self.read_fname
@@ -56,12 +72,9 @@ class Player(Person):
         self.read_birthdate
         self.read_post
     
-    def show_coach_info(self):
-        print(self.show_fullname)
-        print(self.show_idcode)
-        print(self.show_birthdate)
-        print(self.show_post)
 
+    
+        
         
 
 
@@ -98,6 +111,8 @@ class Coach(Person):
 
 
 class Team:
+    MAX_PLAYERS_PER_TEAM = 11
+
     def __init__(self):
         self.team_name = []
         self.team_code = []
@@ -155,26 +170,25 @@ class Team:
             player.show_player_info()
             print("\n---------------------------")
 
-    class Team:
-        MAX_PLAYERS_PER_TEAM = 11
 
-        def transfer_player(self, player, new_team):
-            if player in self.players:
-                if len(new_team.players) < MAX_PLAYERS_PER_TEAM:
-                    self.players.remove(player)
-                    new_team.players.append(player)
-                    player.team = new_team
-                    print(f"Player {player.fname} {player.lname} transferred from {self.team_name} to {new_team.team_name}.")
-                    return True
-                else:
-                    print(f"The new team {new_team.team_name} has reached the maximum number of players.")
+    def transfer_player(self, player, new_team):
+        if player in self.players:
+            if len(new_team.players) < MAX_PLAYERS_PER_TEAM:
+                self.players.remove(player)
+                new_team.players.append(player)
+                player.team = new_team
+                print(f"Player {player.fname} {player.lname} transferred from {self.team_name} to {new_team.team_name}.")
+                return True
             else:
-                print(f"Player {player.fname} {player.lname} is not in {self.team_name}.")
+                print(f"The new team {new_team.team_name} has reached the maximum number of players.")
+        else:
+            print(f"Player {player.fname} {player.lname} is not in {self.team_name}.")
 
-            return False
+        return False
 
 
-
+   
+    
 
 class League:
     def __init__(self):
