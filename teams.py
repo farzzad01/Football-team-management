@@ -16,7 +16,8 @@ class Person:
         self.idcode = input("Enter ID code: ")
 
     def read_birthdate(self):
-        self.birthdate = input("Enter birthdate (): ")
+        year = input("Enter birth year: ")
+        self.birthdate = year
 
     def show_fullname(self):
         print("Full name:", self.fname, self.lname)
@@ -27,6 +28,10 @@ class Person:
     def show_birthdate(self):
         print("Birthdate:", self.birthdate)
 
+    def show_birthdate(self):
+        print("Birthdate:", self.birthdate)
+
+
 
 class Player(Person):
     def __init__(self):
@@ -36,13 +41,13 @@ class Player(Person):
         self.height = []
         self.weight = []
         self.nationality = []
+       
+        
 
-    def read_post(self):
-        self.post = input("Enter player's post: ")
     
-    def show_post(self):
-        print('player post is ', self.post)
     
+ 
+   
     def read_goal(self):
         self.goal = input('enter player goals')
     
@@ -54,6 +59,22 @@ class Player(Person):
 
     def read_nationality(self):
         self.nationality = input("Enter player's nationality: ")
+        foreign_option = input("Is the player a foreign player? (y/n): ")
+        if foreign_option.lower() == "y":
+            self.is_foreign = True
+
+
+    def read_palyer_info(self):
+        self.read_fname()
+        self.read_lname()
+        self.read_idcode()
+        self.read_birthdate()
+        self.read_height()
+        self.read_weight()
+        self.read_nationality()
+        self.read_post()
+        self.read_stats()
+        
 
     def show_player_info(self):
         super().show_fullname()
@@ -63,19 +84,9 @@ class Player(Person):
         print("Height:", self.height)
         print("Weight:", self.weight)
         print("Nationality:", self.nationality)
-
-    
-    def read_palyer_info(self):
-        self.read_fname
-        self.read_lname
-        self.read_idcode
-        self.read_birthdate
-        self.read_post
-    
-
-    
+     
         
-        
+
 
 
 class Coach(Person):
@@ -83,30 +94,24 @@ class Coach(Person):
         super().__init__()
         self.card_type = []
 
-    def read_card_type(self):
-        self.card_type = input("Enter card type (A, B, C): ")
-
+    
     def show_card_type(self):
         print("Card type:", self.card_type)
+    
+    def read_coach_info(self):
+        self.read_fname()
+        self.read_lname()
+        self.read_birthdate()
+        self.read_idcode()
+        self.read_card_and_ranking()
     
     def show_caoch_info(self):
         super().show_fullname()
         super().show_idcode()
         super().show_birthdate()
-        print("post:", self.card_type)
-
-    def read_coach_info(self):
-        self.read_fname
-        self.read_lname
-        self.read_birthdate
-        self.read_card_type
-        self.read_idcode
-    
-    def show_coach_info(self):
-        print(self.show_fullname)
-        print(self.show_idcode)
-        print(self.show_birthdate)
-        print(self.show_card_type)
+        print("Card Type: ", self.card_type)
+        print("ranking: ", self.team_ranking)
+        
 
 
 
@@ -136,55 +141,19 @@ class Team:
         self.read_team_code()
         print("---------------------------")
         print("Coach Info:")
-        self.coach.read_fname()
-        self.coach.read_lname()
-        self.coach.read_idcode()
-        self.coach.read_birthdate()
-        self.coach.read_card_type()
+        self.coach.read_coach_info()
         print("---------------------------")
         num_players = int(input("Enter the number of players in the team: "))
         for i in range(num_players):
             print("Player", i+1, "Info:")
             player = Player()
-            player.read_fname()
-            player.read_lname()
-            player.read_idcode()
-            player.read_birthdate()
-            player.read_post()
+            player.read_palyer_info()
             self.players.append(player)
             print("---------------------------")
 
-    def show_team_info(self):
-        print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
-        self.show_team_name()
-        self.show_team_code()
-        print("\n---------------------------")
-        print("Coach Info:")
-        self.coach.show_fullname()
-        self.coach.show_idcode()
-        self.coach.show_birthdate()
-        self.coach.show_card_type()
-        print("\n---------------------------")
-        for i, player in enumerate(self.players):
-            print("\nPlayer", i+1, "Info:")
-            player.show_player_info()
-            print("\n---------------------------")
-
-
-    def transfer_player(self, player, new_team):
-        if player in self.players:
-            if len(new_team.players) < MAX_PLAYERS_PER_TEAM:
-                self.players.remove(player)
-                new_team.players.append(player)
-                player.team = new_team
-                print(f"Player {player.fname} {player.lname} transferred from {self.team_name} to {new_team.team_name}.")
-                return True
-            else:
-                print(f"The new team {new_team.team_name} has reached the maximum number of players.")
-        else:
-            print(f"Player {player.fname} {player.lname} is not in {self.team_name}.")
-
-        return False
+        print("---------------------------")
+        print("Choose Captain:")
+        self.choose_captain()
 
 
     def choose_captain(self):
@@ -192,9 +161,9 @@ class Team:
             print("Select the captain from the following players:")
             for i, player in enumerate(self.players):
                 print(f"{i+1}. {player.fname} {player.lname}")
-            
+
             choice = int(input("Enter the number of the chosen captain: "))
-            
+
             if 1 <= choice <= len(self.players):
                 captain = self.players[choice - 1]
                 print(f"{captain.fname} {captain.lname} is the captain of {self.team_name}.")
@@ -204,13 +173,47 @@ class Team:
         else:
             print("No players in the team. Cannot choose a captain.")
 
-        return None
+        return None   
+        
+            # if num_players > 11:
+            #     choice = input("Do you want to add a reserve player? (y/n): ")
+            #     if choice.lower() == "y":
+            #         print("Reserve Player Info:")
+            #         reserve_player = Player()
+            #         reserve_player.read_player_info()
+            #         self.players.append(reserve_player)
+            #         print("---------------------------")
+            #     else:
+            #         break
+
+
+
+    def show_team_info(self):
+        print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
+        self.show_team_name()
+        self.show_team_code()
+        print("\n---------------------------")
+        print("Coach Info:")
+        self.coach.show_caoch_info
+        print("\n---------------------------")
+        for i, player in enumerate(self.players):
+            print("\nPlayer", i+1, "Info:")
+            player.show_player_info()
+            print("\n---------------------------")
+
+
+
+
+
 
     def get_players_nationality(self):
         nationalities = []
         for player in self.players:
             nationalities.append(player.nationality)
         return nationalities
+    
+
+ 
 
 
 class League:
@@ -225,6 +228,7 @@ class League:
     def display_all_teams(self):
         for team in self.teams:
             team.show_team_info()
+    
 
     def display_team_by_code(self):
         code = input("Enter team's code: ")
@@ -287,6 +291,8 @@ class League:
 
 
 league = League()
+team = Team()
+
 
 league.read_team_info()
 
@@ -301,3 +307,7 @@ league.display_team_by_player()
 league.display_players_by_name()
 
 league.display_players_over_30()
+
+league.display_coaches_with_teams()
+
+team.player_statistics()
