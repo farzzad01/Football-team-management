@@ -121,7 +121,22 @@ class Player(Person):
         print("Height:", self.height)
         print("Weight:", self.weight)
         print("Nationality:", self.nationality)
-     
+        if self.post.lower() == "attack":
+            print('goal count ', self.goal)
+            print('shot count ', self.shot)
+        elif self.post.lower() == 'midfielder':
+            print('pass count', self.passes)
+            print('shot count', self.shot)
+            print('goal count' , self.goal)
+        elif self.post.lower() == 'defense':
+            print('ball_taken', self.ball_taken)
+            print('passes_given', self.passes_given)
+            print('has_card', self.has_card)
+            print('num card', self.num_cards)
+        elif self.post.lower() == 'goalkeeper':
+            print('clean_sheets' , self.clean_sheets)
+        elif self == self.team.captain:
+            print('Captain')
         
 
 
