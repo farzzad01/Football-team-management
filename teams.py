@@ -438,7 +438,7 @@ class League:
 
             for team in self.teams:
                 for player in team.players:
-                    if isinstance(player, Goalkeeper) and player.clean_sheets > max_clean_sheets:
+                    if isinstance(player) and player.clean_sheets > max_clean_sheets:
                         max_clean_sheets = player.clean_sheets
                         goalkeeper_with_most_clean_sheets = player
 
