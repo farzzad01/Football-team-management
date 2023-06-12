@@ -32,12 +32,16 @@ class Player(Person):
     def __init__(self):
         super().__init__()
         self.post = []
+        self.goal = []
 
     def read_post(self):
         self.post = input("Enter player's post: ")
     
     def show_post(self):
         print('player post is ', self.post)
+    
+    def read_goal(self):
+        self.goal = input('enter player goals')
 
     def show_player_info(self):
         super().show_fullname()
@@ -150,6 +154,11 @@ class Team:
             print("\nPlayer", i+1, "Info:")
             player.show_player_info()
             print("\n---------------------------")
+
+    
+                    
+
+
 
 
 class League:
