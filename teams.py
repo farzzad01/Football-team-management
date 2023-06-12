@@ -141,6 +141,7 @@ class Player(Person):
 
 
 
+
 class Coach(Person):
     def __init__(self):
         super().__init__()
@@ -310,6 +311,11 @@ class League:
         for team in self.teams:
             team.show_team_info()
     
+    def display_coaches_with_teams(self):
+        for team in self.teams:
+            print(f"Team: {team.team_name}")
+            team.coach.show_caoch_info()
+            print("---------------------------")
 
     def display_team_by_code(self):
         code = input("Enter team's code: ")
