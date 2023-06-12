@@ -250,8 +250,6 @@ class Team:
             #     else:
             #         break
 
-
-
     def show_team_info(self):
         print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
         self.show_team_name()
@@ -296,6 +294,15 @@ class Team:
             print("\nPlayer", i+1, "Info:")
             player.show_player_info()
             print("\n---------------------------")
+
+
+    def get_foreign_players_count(self):
+        foreign_players_count = 0
+        for player in self.players:
+            if player.is_foreign:
+                foreign_players_count += 1
+        return foreign_players_count
+
 
 
 class League:
@@ -375,6 +382,19 @@ class League:
                     print(Player.show_fullname, "(", age, "years old )")
                     print("---------------------")
 
+    def get_team_with_most_foreign_players(self):
+        team_with_most_foreign_players = None
+        max_foreign_players_count = 0
+
+        for team in self.teams:
+            foreign_players_count = team.get_foreign_players_count()
+
+            if foreign_players_count > max_foreign_players_count:
+                max_foreign_players_count = foreign_players_count
+                team_with_most_foreign_players = team
+
+        return team_with_most_foreign_players
+
 
 
 league = League()
@@ -398,3 +418,4 @@ league.display_players_over_30()
 league.display_coaches_with_teams()
 
 team.player_statistics()
+
