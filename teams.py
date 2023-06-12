@@ -54,6 +54,15 @@ class Player(Person):
         
 
     
+    def read_post(self):
+        valid_modes = ["attack", "midfielder", "defense", "goalkeeper"]
+        while True:
+            mode = input("Enter player's position (attack/midfielder/defense/goalkeeper): ")
+            if mode.lower() in valid_modes:
+                self.post = mode.lower()
+                break
+            else:
+                print("Invalid position. Please choose one of the following: attack, midfielder, defense, goalkeeper.")
     
  
    
