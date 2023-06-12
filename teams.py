@@ -155,8 +155,23 @@ class Team:
             player.show_player_info()
             print("\n---------------------------")
 
-    
-                    
+    class Team:
+        MAX_PLAYERS_PER_TEAM = 11
+
+        def transfer_player(self, player, new_team):
+            if player in self.players:
+                if len(new_team.players) < MAX_PLAYERS_PER_TEAM:
+                    self.players.remove(player)
+                    new_team.players.append(player)
+                    player.team = new_team
+                    print(f"Player {player.fname} {player.lname} transferred from {self.team_name} to {new_team.team_name}.")
+                    return True
+                else:
+                    print(f"The new team {new_team.team_name} has reached the maximum number of players.")
+            else:
+                print(f"Player {player.fname} {player.lname} is not in {self.team_name}.")
+
+            return False
 
 
 
