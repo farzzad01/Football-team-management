@@ -64,7 +64,26 @@ class Player(Person):
             else:
                 print("Invalid position. Please choose one of the following: attack, midfielder, defense, goalkeeper.")
     
- 
+    def read_stats(self):
+        if self.post.lower() == "attack":
+            self.goal = int(input("Enter the number of goals scored this season: "))
+            self.shot = int(input("Enter the number of successful shots this season: "))
+        elif self.post.lower() == "midfielder":
+            self.passes = int(input("Enter the number of passes made this season: "))
+            self.shot = int(input("Enter the number of successful shots this season: "))
+            choice = input("Did the player score a goal this season? (y/n): ")
+            if choice == 'y':
+                self.goal= int(input('how many goals? '))
+        elif self.post.lower() == "defense":
+            self.ball_taken = int(input("Enter the number of times the ball was taken from opponents: "))
+            self.passes_given = int(input("Enter the number of passes given to team mates: "))
+            card_option = input("Did the player receive a card this season? (y/n): ")
+            if card_option == "y":
+                self.has_card = True
+                self.num_cards = int(input("Enter the number of cards received: "))
+        elif self.post.lower() == "goalkeeper":
+            self.clean_sheets = int(input("Enter the number of clean sheets made this season: "))
+   
    
     def read_goal(self):
         self.goal = input('enter player goals')
