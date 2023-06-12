@@ -16,8 +16,16 @@ class Person:
         self.idcode = input("Enter ID code: ")
 
     def read_birthdate(self):
-        year = input("Enter birth year: ")
-        self.birthdate = year
+        while True:
+            try:
+                year = int(input("Enter birth year: "))
+                if 1970 <= year <= 2010:
+                    self.birthdate = year
+                    break
+                else:
+                    print("The birth year should be between 1970 and 2010.")
+            except ValueError:
+                print("Invalid input. Please enter a valid birth year.")
 
     def show_fullname(self):
         print("Full name:", self.fname, self.lname)
