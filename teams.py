@@ -89,7 +89,7 @@ class Player(Person):
 
             choice = input("Did he make a foul on the opponent?? (y/n): ")
             if choice == 'y':
-                self.goal= int(input('how many fouls? '))
+                self.num_foul= int(input('how many fouls? '))
 
         elif self.post.lower() == "defense":
             self.num_foul = int(input("Enter the number of times the opponent has been fouled "))
@@ -168,6 +168,7 @@ class Player(Person):
             print('pass count', self.passes)
             print('shot count', self.shot)
             print('goal count' , self.goal)
+            print('Foul count' , self.num_foul)
         elif self.post.lower() == 'defense':
             print('ball_taken', self.ball_taken)
             print('passes_given', self.passes_given)
@@ -175,8 +176,9 @@ class Player(Person):
             print('num card', self.num_cards)
         elif self.post.lower() == 'goalkeeper':
             print('clean_sheets' , self.clean_sheets)
-        elif self == self.team.captain:
-            print('Captain')
+        
+        # elif self == self.team.captain:
+        #     print('Captain')
         
 
 
@@ -234,12 +236,13 @@ class Team:
         self.team_code = input("Enter team code: ")
 
     def show_team_name(self):
-        print("Team name:", self.team_name)
+        print("Team name: ", self.team_name)
 
     def show_team_code(self):
-        print("Team code:", self.team_code)
+        print("Team code: ", self.team_code)
 
     def read_team_info(self):
+        print(f'information for team {i+1}')
         self.read_team_name()
         self.read_team_code()
         print("---------------------------")
@@ -272,7 +275,7 @@ class Team:
                 print(f"{captain.fname} {captain.lname} is the captain of {self.team_name}.")
                 return captain
             else:
-                print("Invalid choice. Please try again.")
+                print("Please try again there is no captain.")
         else:
             print("No players in the team. Cannot choose a captain.")
 
@@ -295,7 +298,7 @@ class Team:
         self.show_team_code()
         print("\n---------------------------")
         print("Coach Info:")
-        self.coach.show_caoch_info
+        self.coach.show_caoch_info()
         print("\n---------------------------")
         for i, player in enumerate(self.players):
             print("\nPlayer", i+1, "Info:")
@@ -518,7 +521,8 @@ while True:
     print("11. Player with most passes")
     print("12. Player with most shots on goal")
     print("13. Team with goalkeeper with most clean sheets")
-    print('14. The most violent team')
+    print('14. display most violent team')
+    print('15. get player nationality')
     print("0. Exit")
 
     choice = input("Enter your choice: ")
@@ -580,6 +584,9 @@ while True:
             print(f"Total fouls: {team_with_most_fouls.get_total_fouls()}")
         else:
             print("No teams or players have been added to the league.")
+    
+    elif choice == "15":
+        Team.get_players_nationality()
             
     
     elif choice == "0":
@@ -587,3 +594,4 @@ while True:
         break
     else:
         print("Invalid choice. Please try again.\n")
+
