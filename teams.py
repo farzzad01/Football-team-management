@@ -1,8 +1,10 @@
+import tkinter as tk
+from tkinter import messagebox
 
 class Person:
     def __init__(self):
-        self.fname.upper = []
-        self.lname.upper = []
+        self.fname = []
+        self.lname = []
         self.idcode = []
         self.birthdate = []
 
@@ -183,6 +185,93 @@ class Player(Person):
         #     print('Captain')
         
 
+    
+class PlayerGUI(tk.Tk):
+    def __init__(self):
+        super().__init__()
+
+        self.player = Player()
+
+        self.title("Player Information")
+        self.geometry("400x300")
+
+        player_name_label = tk.Label(self, text="Player Name:")
+        player_name_label.pack()
+        self.player_name_entry = tk.Entry(self)
+        self.player_name_entry.pack()
+
+        player_age_label = tk.Label(self, text="Player Age:")
+        player_age_label.pack()
+        self.player_age_entry = tk.Entry(self)
+        self.player_age_entry.pack()
+
+        player_position_label = tk.Label(self, text="Player Position:")
+        player_position_label.pack()
+        self.player_position_entry = tk.Entry(self)
+        self.player_position_entry.pack()
+
+        save_button = tk.Button(self, text="Save", command=self.save_player)
+        save_button.pack(pady=10)
+
+        display_button = tk.Button(self, text="Display", command=self.display_player)
+        display_button.pack()
+
+    def save_player(self):
+        name = self.player_name_entry.get()
+        age = int(self.player_age_entry.get())
+        position = self.player_position_entry.get()
+
+        self.player.set_name(name)
+        self.player.set_age(age)
+        self.player.set_position(position)
+
+        self.player_name_entry.delete(0, tk.END)
+        self.player_age_entry.delete(0, tk.END)
+        self.player_position_entry.delete(0, tk.END)
+
+        print("Player information saved.")
+
+    def display_player(self):
+        name = self.player.get_name()
+        age = self.player.get_age()
+        position = self.player.get_position()
+
+        print("Player Information:")
+        print(f"Name: {name}")
+        print(f"Age: {age}")
+        print(f"Position: {position}")
+
+
+class Player:
+    def __init__(self):
+        self.name = ""
+        self.age = 0
+        self.position = ""
+
+    def set_name(self, name):
+        self.name = name
+
+    def set_age(self, age):
+        self.age = age
+
+    def set_position(self, position):
+        self.position = position
+
+    def get_name(self):
+        return self.name
+
+    def get_age(self):
+        return self.age
+
+    def get_position(self):
+        return self.position
+
+
+if __name__ == "__main__":
+    player_app = PlayerGUI()
+    player_app.mainloop()
+
+
 
 
 class Coach(Person):
@@ -339,6 +428,61 @@ class Team:
                 if player.is_foreign:
                     foreign_players_count += 1
             return foreign_players_count
+
+class TeamGUI(tk.Tk):
+    def __init__(self):
+        super().__init__()
+        self.title("Team Information")
+        self.geometry("400x400")
+
+        self.team = Team()
+
+        self.create_widgets()
+
+    def create_widgets(self):
+        self.display_all_teams_btn = tk.Button(self, text="read taem info", command=self.read_team_info)
+        self.display_all_teams_btn.pack(pady=5)
+
+        self.display_all_teams_btn = tk.Button(self, text="Display All Teams", command=self.display_all_teams)
+        self.display_all_teams_btn.pack(pady=5)
+
+        self.display_team_by_code_btn = tk.Button(self, text="Display Team by Code", command=self.display_team_by_code)
+        self.display_team_by_code_btn.pack(pady=5)
+
+        self.display_team_by_coach_btn = tk.Button(self, text="Display Team by Coach", command=self.display_team_by_coach)
+        self.display_team_by_coach_btn.pack(pady=5)
+
+        self.display_team_by_player_btn = tk.Button(self, text="Display Team by Player", command=self.display_team_by_player)
+        self.display_team_by_player_btn.pack(pady=5)
+
+    def read_team_info(self):
+        all_teams = self.team.read_team_info()
+        messagebox.showinfo("All Teams", all_teams)
+
+    def display_all_teams(self):
+        all_teams = self.team.display_all_teams()
+        messagebox.showinfo("All Teams", all_teams)
+
+    def display_team_by_code(self):
+        team_code = input("Enter the team code: ")
+        team_info = self.team.display_team_by_code(team_code)
+        messagebox.showinfo("Team Information", team_info)
+
+    def display_team_by_coach(self):
+        coach_name = input("Enter the coach name: ")
+        team_info = self.team.display_team_by_coach(coach_name)
+        messagebox.showinfo("Team Information", team_info)
+
+    def display_team_by_player(self):
+        player_name = input("Enter the player name: ")
+        team_info = self.team.display_team_by_player(player_name)
+        messagebox.showinfo("Team Information", team_info)
+
+if __name__ == "__main__":
+    team_gui = TeamGUI()
+    team_gui.mainloop()
+
+
 
 
 class League:
