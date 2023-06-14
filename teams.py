@@ -206,8 +206,40 @@ class PlayerGUI(tk.Tk):
         self.player_age_entry.pack()
 
         player_position_label = tk.Label(self, text="Player Position:")
-        
-    
+        player_position_label.pack()
+        self.player_position_entry = tk.Entry(self)
+        self.player_position_entry.pack()
+
+        save_button = tk.Button(self, text="Save", command=self.save_player)
+        save_button.pack(pady=10)
+
+        display_button = tk.Button(self, text="Display", command=self.display_player)
+        display_button.pack()
+
+    def save_player(self):
+        name = self.player_name_entry.get()
+        age = int(self.player_age_entry.get())
+        position = self.player_position_entry.get()
+
+        self.player.set_name(name)
+        self.player.set_age(age)
+        self.player.set_position(position)
+
+        self.player_name_entry.delete(0, tk.END)
+        self.player_age_entry.delete(0, tk.END)
+        self.player_position_entry.delete(0, tk.END)
+
+        print("Player information saved.")
+
+    def display_player(self):
+        name = self.player.get_name()
+        age = self.player.get_age()
+        position = self.player.get_position()
+
+        print("Player Information:")
+        print(f"Name: {name}")
+        print(f"Age: {age}")
+        print(f"Position: {position}")
 
 
 
