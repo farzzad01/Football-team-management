@@ -1,8 +1,8 @@
 
 class Person:
     def __init__(self):
-        self.fname = []
-        self.lname = []
+        self.fname.upper = []
+        self.lname.upper = []
         self.idcode = []
         self.birthdate = []
 
@@ -151,6 +151,8 @@ class Player(Person):
         self.read_post()
         self.read_stats()
         
+    def show_height(self):
+        print(self.height)
 
 
     def show_player_info(self):
@@ -242,7 +244,6 @@ class Team:
         print("Team code: ", self.team_code)
 
     def read_team_info(self):
-        print(f'information for team {i+1}')
         self.read_team_name()
         self.read_team_code()
         print("---------------------------")
@@ -272,7 +273,9 @@ class Team:
 
             if 1 <= choice <= len(self.players):
                 captain = self.players[choice - 1]
+                print('--------------------------------------')
                 print(f"{captain.fname} {captain.lname} is the captain of {self.team_name}.")
+                print('--------------------------------------')
                 return captain
             else:
                 print("Please try again there is no captain.")
@@ -322,34 +325,26 @@ class Team:
     #         print(f"Player {player.fname} {player.lname} is not in {self.team_name}.")
 
     #     return False
-
-
-    def get_players_nationality(self):
-        nationalities = []
-        for player in self.players:
-            nationalities.append(player.nationality)
-        return nationalities
     
 
     def player_statistics(self):
         for i, player in enumerate(self.players):
             print("\nPlayer", i+1, "Info:")
-            player.show_player_info()
+            player.show_player_info(self)
             print("\n---------------------------")
 
-
     def get_foreign_players_count(self):
-        foreign_players_count = 0
-        for player in self.players:
-            if player.is_foreign:
-                foreign_players_count += 1
-        return foreign_players_count
-
+            foreign_players_count = 0
+            for player in self.players:
+                if player.is_foreign:
+                    foreign_players_count += 1
+            return foreign_players_count
 
 
 class League:
     def __init__(self):
         self.teams = []
+        self.player = Player()
 
     def read_team_info(self):
         team = Team()
@@ -421,8 +416,14 @@ class League:
                 birth_year = int(Player.birthdate)
                 age = current_year - birth_year
                 if age > 30:
-                    print(Player.show_fullname, "(", age, "years old )")
+                    print(Player.show_fullname(), "(", age, "years old )")
                     print("---------------------")
+    
+    def display_players_height(self):
+        for team in self.teams:
+            for player in team.players:
+                print(player.show_fullname(), "(", player.height, "CM)")
+
 
     def get_team_with_most_foreign_players(self):
         team_with_most_foreign_players = None
@@ -501,6 +502,17 @@ class League:
 
             return fouling_team
 
+    # def get_players_nationality(self):
+    #         nationalities = []
+    #         for player in self.players:
+    #             nationalities.append(player.nationality)
+    #         return nationalities
+
+    
+
+
+
+
 
 
 
@@ -544,50 +556,7 @@ while True:
     elif choice == "8":
         league.display_coaches_with_teams()
     elif choice == "9":
-        Team.player_statistics()
-
-    
-    elif choice == "10":
-        player_with_most_goals = league.get_player_with_most_goals()
-        if player_with_most_goals is not None:
-            print(f"The player with the most goals is {player_with_most_goals.fname} {player_with_most_goals.lname}.")
-            print(f"Goals scored: {player_with_most_goals.goal}")
-        else:
-            print("No players have been added to the league.")
-    elif choice == "11":
-        player_with_most_passes = league.get_player_with_most_passes()
-        if player_with_most_passes is not None:
-            print(f"The player with the most passes is {player_with_most_passes.fname} {player_with_most_passes.lname}.")
-            print(f"Passes made: {player_with_most_passes.passes}")
-        else:
-            print("No players have been added to the league.")
-    elif choice == "12":
-        player_with_most_shots = league.get_player_with_most_shots_on_goal()
-        if player_with_most_shots is not None:
-            print(f"The player with the most shots on goal is {player_with_most_shots.fname} {player_with_most_shots.lname}.")
-            print(f"Shots on goal: {player_with_most_shots.shot}")
-        else:
-            print("No players have been added to the league.")
-    elif choice == "13":
-        team_with_most_clean_sheets = league.get_team_with_goalkeeper_most_clean_sheets()
-        if team_with_most_clean_sheets is not None:
-            print(f"The team with the goalkeeper who has the most clean sheets is {team_with_most_clean_sheets.name}.")
-            print(f"Goalkeeper: {team_with_most_clean_sheets.goalkeeper.fname} {team_with_most_clean_sheets.goalkeeper.lname}")
-            print(f"Clean sheets: {team_with_most_clean_sheets.goalkeeper.clean_sheets}")
-        else:
-            print("No goalkeepers have been added to the league.")
-    
-    elif choice == "14":
-        team_with_most_fouls = league.get_team_with_most_fouls()
-        if team_with_most_fouls is not None:
-            print(f"The team with the most fouls is {team_with_most_fouls.name}.")
-            print(f"Total fouls: {team_with_most_fouls.get_total_fouls()}")
-        else:
-            print("No teams or players have been added to the league.")
-    
-    elif choice == "15":
-        Team.get_players_nationality()
-            
+        league.display_players_height()
     
     elif choice == "0":
         print("Exiting the program.")
