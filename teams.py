@@ -439,7 +439,21 @@ class TeamGUI(tk.Tk):
 
         self.create_widgets()
 
-    
+    def create_widgets(self):
+        self.display_all_teams_btn = tk.Button(self, text="read taem info", command=self.read_team_info)
+        self.display_all_teams_btn.pack(pady=5)
+
+        self.display_all_teams_btn = tk.Button(self, text="Display All Teams", command=self.display_all_teams)
+        self.display_all_teams_btn.pack(pady=5)
+
+        self.display_team_by_code_btn = tk.Button(self, text="Display Team by Code", command=self.display_team_by_code)
+        self.display_team_by_code_btn.pack(pady=5)
+
+        self.display_team_by_coach_btn = tk.Button(self, text="Display Team by Coach", command=self.display_team_by_coach)
+        self.display_team_by_coach_btn.pack(pady=5)
+
+        self.display_team_by_player_btn = tk.Button(self, text="Display Team by Player", command=self.display_team_by_player)
+        self.display_team_by_player_btn.pack(pady=5)
 
 
 
