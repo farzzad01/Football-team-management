@@ -455,7 +455,32 @@ class TeamGUI(tk.Tk):
         self.display_team_by_player_btn = tk.Button(self, text="Display Team by Player", command=self.display_team_by_player)
         self.display_team_by_player_btn.pack(pady=5)
 
+    def read_team_info(self):
+        all_teams = self.team.read_team_info()
+        messagebox.showinfo("All Teams", all_teams)
 
+    def display_all_teams(self):
+        all_teams = self.team.display_all_teams()
+        messagebox.showinfo("All Teams", all_teams)
+
+    def display_team_by_code(self):
+        team_code = input("Enter the team code: ")
+        team_info = self.team.display_team_by_code(team_code)
+        messagebox.showinfo("Team Information", team_info)
+
+    def display_team_by_coach(self):
+        coach_name = input("Enter the coach name: ")
+        team_info = self.team.display_team_by_coach(coach_name)
+        messagebox.showinfo("Team Information", team_info)
+
+    def display_team_by_player(self):
+        player_name = input("Enter the player name: ")
+        team_info = self.team.display_team_by_player(player_name)
+        messagebox.showinfo("Team Information", team_info)
+
+if __name__ == "__main__":
+    team_gui = TeamGUI()
+    team_gui.mainloop()
 
 
 
