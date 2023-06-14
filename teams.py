@@ -510,11 +510,7 @@ class League:
 
     
 
-
-
-
-
-
+    
 
 league = League()
 
