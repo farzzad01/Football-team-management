@@ -242,7 +242,34 @@ class PlayerGUI(tk.Tk):
         print(f"Position: {position}")
 
 
+class Player:
+    def __init__(self):
+        self.name = ""
+        self.age = 0
+        self.position = ""
 
+    def set_name(self, name):
+        self.name = name
+
+    def set_age(self, age):
+        self.age = age
+
+    def set_position(self, position):
+        self.position = position
+
+    def get_name(self):
+        return self.name
+
+    def get_age(self):
+        return self.age
+
+    def get_position(self):
+        return self.position
+
+
+if __name__ == "__main__":
+    player_app = PlayerGUI()
+    player_app.mainloop()
 
 
 
