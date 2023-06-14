@@ -429,6 +429,20 @@ class Team:
                     foreign_players_count += 1
             return foreign_players_count
 
+class TeamGUI(tk.Tk):
+    def __init__(self):
+        super().__init__()
+        self.title("Team Information")
+        self.geometry("400x400")
+
+        self.team = Team()
+
+        self.create_widgets()
+
+    
+
+
+
 
 
 
