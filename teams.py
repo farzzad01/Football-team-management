@@ -516,13 +516,11 @@ class TeamInfoGUI:
         self.window = tk.Tk()
         self.window.title("Team Information")
         
-        # Create labels and entries for team information
         self.team_name_label = tk.Label(self.window, text="Team Name:")
         self.team_name_entry = tk.Entry(self.window)
         self.team_code_label = tk.Label(self.window, text="Team Code:")
         self.team_code_entry = tk.Entry(self.window)
         
-        # Create labels and entries for coach information
         self.coach_name_label = tk.Label(self.window, text="Coach Name:")
         self.coach_name_entry = tk.Entry(self.window)
         self.coach_surname_label = tk.Label(self.window, text="Coach Surname:")
@@ -536,7 +534,6 @@ class TeamInfoGUI:
         self.coach_rank_label = tk.Label(self.window, text="Coach Team Rank:")
         self.coach_rank_entry = tk.Entry(self.window)
         
-        # Create labels and entries for player information
         self.player_name_label = tk.Label(self.window, text="Player Name:")
         self.player_name_entry = tk.Entry(self.window)
         self.player_surname_label = tk.Label(self.window, text="Player Surname:")
@@ -548,15 +545,12 @@ class TeamInfoGUI:
         self.player_position_label = tk.Label(self.window, text="Player Position:")
         self.player_position_entry = tk.Entry(self.window)
         
-        # Create buttons for League class methods
         self.get_team_info_button = tk.Button(self.window, text="Get Team Info", command=self.show_team_info)
         self.get_coach_info_button = tk.Button(self.window, text="Get Coach Info", command=self.show_coach_info)
         self.get_player_info_button = tk.Button(self.window, text="Get Player Info", command=self.show_player_info)
         
-        # Create a label to display information
         self.info_label = tk.Label(self.window, text="")
         
-        # Organize the widgets using the grid layout
         self.team_name_label.grid(row=0, column=0, sticky=tk.E)
         self.team_name_entry.grid(row=0, column=1)
         self.team_code_label.grid(row=1, column=0, sticky=tk.E)
@@ -624,7 +618,6 @@ class TeamInfoGUI:
                f"Player ID Code: {player_id}\nPlayer Position: {player_position}"
         self.info_label.configure(text=info)
 
-# Create an instance of the GUI
 gui = TeamInfoGUI()
 
 
