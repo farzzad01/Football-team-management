@@ -511,26 +511,6 @@ class League:
     
 import tkinter as tk
 
-class Team:
-    def __init__(self):
-        self.team_name = ""
-        self.team_code = ""
-
-class Coach:
-    def __init__(self):
-        self.last_name = ""
-        self.date_of_birth = ""
-        self.id_code = ""
-        self.card_type = ""
-        self.team_rank = ""
-
-class Player:
-    def __init__(self):
-        self.last_name = ""
-        self.date_of_birth = ""
-        self.id_code = ""
-        self.height = ""
-        self.weight = ""
 
 team = Team()
 coach = Coach()
@@ -543,11 +523,11 @@ def save_team_info():
     team_code_entry.delete(0, tk.END)
 
 def save_coach_info():
-    coach.last_name = coach_last_name_entry.get()
-    coach.date_of_birth = coach_dob_entry.get()
-    coach.id_code = coach_id_code_entry.get()
+    coach.fname = coach_last_name_entry.get()
+    coach.birthdate = coach_dob_entry.get()
+    coach.idcode = coach_id_code_entry.get()
     coach.card_type = coach_card_type_entry.get()
-    coach.team_rank = team_rank_entry.get()
+    coach.team_ranking = team_rank_entry.get()
     coach_last_name_entry.delete(0, tk.END)
     coach_dob_entry.delete(0, tk.END)
     coach_id_code_entry.delete(0, tk.END)
@@ -556,9 +536,9 @@ def save_coach_info():
 
 def save_player_info():
     player = Player()
-    player.last_name = player_last_name_entry.get()
-    player.date_of_birth = player_dob_entry.get()
-    player.id_code = player_id_code_entry.get()
+    player.fname = player_last_name_entry.get()
+    player.birthdate = player_dob_entry.get()
+    player.idcode = player_id_code_entry.get()
     player.height = player_height_entry.get()
     player.weight = player_weight_entry.get()
     players.append(player)
@@ -571,15 +551,15 @@ def save_player_info():
 def display_team_info():
     output = f"Team Name: {team.team_name}\n"
     output += f"Team Code: {team.team_code}\n"
-    output += f"Coach Last Name: {coach.last_name}\n"
-    output += f"Coach Date of Birth: {coach.date_of_birth}\n"
-    output += f"Coach ID Code: {coach.id_code}\n"
+    output += f"Coach Last Name: {coach.fname}\n"
+    output += f"Coach Date of Birth: {coach.birthdate}\n"
+    output += f"Coach ID Code: {coach.idcode}\n"
     output += f"Coach Card Type: {coach.card_type}\n"
-    output += f"Team Rank: {coach.team_rank}\n"
+    output += f"Team Rank: {coach.team_ranking}\n"
     for i, player in enumerate(players):
         output += f"\nPlayer {i+1}:\n"
-        output += f"Last Name: {player.last_name}\n"
-        output += f"Date of Birth: {player.date_of_birth}\n"
+        output += f"Last Name: {player.fname}\n"
+        output += f"Date of Birth: {player.birthdate}\n"
         output += f"ID Code: {player.id_code}\n"
         output += f"Height: {player.height}\n"
         output += f"Weight: {player.weight}\n"
