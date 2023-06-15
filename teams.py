@@ -621,7 +621,6 @@ class TeamInfoGUI:
 gui = TeamInfoGUI()
 
 
-
     
 
 league = League()
