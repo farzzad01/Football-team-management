@@ -511,140 +511,121 @@ class League:
     
 import tkinter as tk
 
+class TeamInfoGUI:
+    def __init__(self):
+        self.window = tk.Tk()
+        self.window.title("Team Information")
+        
+        # Create labels and entries for team information
+        self.team_name_label = tk.Label(self.window, text="Team Name:")
+        self.team_name_entry = tk.Entry(self.window)
+        self.team_code_label = tk.Label(self.window, text="Team Code:")
+        self.team_code_entry = tk.Entry(self.window)
+        
+        # Create labels and entries for coach information
+        self.coach_name_label = tk.Label(self.window, text="Coach Name:")
+        self.coach_name_entry = tk.Entry(self.window)
+        self.coach_surname_label = tk.Label(self.window, text="Coach Surname:")
+        self.coach_surname_entry = tk.Entry(self.window)
+        self.coach_dob_label = tk.Label(self.window, text="Coach Date of Birth:")
+        self.coach_dob_entry = tk.Entry(self.window)
+        self.coach_id_label = tk.Label(self.window, text="Coach ID Code:")
+        self.coach_id_entry = tk.Entry(self.window)
+        self.coach_card_label = tk.Label(self.window, text="Coach Card Type:")
+        self.coach_card_entry = tk.Entry(self.window)
+        self.coach_rank_label = tk.Label(self.window, text="Coach Team Rank:")
+        self.coach_rank_entry = tk.Entry(self.window)
+        
+        # Create labels and entries for player information
+        self.player_name_label = tk.Label(self.window, text="Player Name:")
+        self.player_name_entry = tk.Entry(self.window)
+        self.player_surname_label = tk.Label(self.window, text="Player Surname:")
+        self.player_surname_entry = tk.Entry(self.window)
+        self.player_dob_label = tk.Label(self.window, text="Player Date of Birth:")
+        self.player_dob_entry = tk.Entry(self.window)
+        self.player_id_label = tk.Label(self.window, text="Player ID Code:")
+        self.player_id_entry = tk.Entry(self.window)
+        self.player_position_label = tk.Label(self.window, text="Player Position:")
+        self.player_position_entry = tk.Entry(self.window)
+        
+        # Create buttons for League class methods
+        self.get_team_info_button = tk.Button(self.window, text="Get Team Info", command=self.show_team_info)
+        self.get_coach_info_button = tk.Button(self.window, text="Get Coach Info", command=self.show_coach_info)
+        self.get_player_info_button = tk.Button(self.window, text="Get Player Info", command=self.show_player_info)
+        
+        # Create a label to display information
+        self.info_label = tk.Label(self.window, text="")
+        
+        # Organize the widgets using the grid layout
+        self.team_name_label.grid(row=0, column=0, sticky=tk.E)
+        self.team_name_entry.grid(row=0, column=1)
+        self.team_code_label.grid(row=1, column=0, sticky=tk.E)
+        self.team_code_entry.grid(row=1, column=1)
+        
+        self.coach_name_label.grid(row=0, column=2, sticky=tk.E)
+        self.coach_name_entry.grid(row=0, column=3)
+        self.coach_surname_label.grid(row=1, column=2, sticky=tk.E)
+        self.coach_surname_entry.grid(row=1, column=3)
+        self.coach_dob_label.grid(row=2, column=2, sticky=tk.E)
+        self.coach_dob_entry.grid(row=2, column=3)
+        self.coach_id_label.grid(row=3, column=2, sticky=tk.E)
+        self.coach_id_entry.grid(row=3, column=3)
+        self.coach_card_label.grid(row=4, column=2, sticky=tk.E)
+        self.coach_card_entry.grid(row=4, column=3)
+        self.coach_rank_label.grid(row=5, column=2, sticky=tk.E)
+        self.coach_rank_entry.grid(row=5, column=3)
+        
+        self.player_name_label.grid(row=0, column=4, sticky=tk.E)
+        self.player_name_entry.grid(row=0, column=5)
+        self.player_surname_label.grid(row=1, column=4, sticky=tk.E)
+        self.player_surname_entry.grid(row=1, column=5)
+        self.player_dob_label.grid(row=2, column=4, sticky=tk.E)
+        self.player_dob_entry.grid(row=2, column=5)
+        self.player_id_label.grid(row=3, column=4, sticky=tk.E)
+        self.player_id_entry.grid(row=3, column=5)
+        self.player_position_label.grid(row=4, column=4, sticky=tk.E)
+        self.player_position_entry.grid(row=4, column=5)
+        
+        self.get_team_info_button.grid(row=6, column=0, sticky=tk.EW)
+        self.get_coach_info_button.grid(row=6, column=1, sticky=tk.EW)
+        self.get_player_info_button.grid(row=6, column=2, sticky=tk.EW)
+        
+        self.info_label.grid(row=7, column=0, columnspan=6)
+        
+        self.window.mainloop()
+    
+    def show_team_info(self):
+        team_name = self.team_name_entry.get()
+        team_code = self.team_code_entry.get()
+        
+        info = f"Team Name: {team_name}\nTeam Code: {team_code}"
+        self.info_label.configure(text=info)
+    
+    def show_coach_info(self):
+        coach_name = self.coach_name_entry.get()
+        coach_surname = self.coach_surname_entry.get()
+        coach_dob = self.coach_dob_entry.get()
+        coach_id = self.coach_id_entry.get()
+        coach_card = self.coach_card_entry.get()
+        coach_rank = self.coach_rank_entry.get()
+        
+        info = f"Coach Name: {coach_name}\nCoach Surname: {coach_surname}\nCoach Date of Birth: {coach_dob}\n"\
+               f"Coach ID Code: {coach_id}\nCoach Card Type: {coach_card}\nCoach Team Rank: {coach_rank}"
+        self.info_label.configure(text=info)
+    
+    def show_player_info(self):
+        player_name = self.player_name_entry.get()
+        player_surname = self.player_surname_entry.get()
+        player_dob = self.player_dob_entry.get()
+        player_id = self.player_id_entry.get()
+        player_position = self.player_position_entry.get()
+        
+        info = f"Player Name: {player_name}\nPlayer Surname: {player_surname}\nPlayer Date of Birth: {player_dob}\n"\
+               f"Player ID Code: {player_id}\nPlayer Position: {player_position}"
+        self.info_label.configure(text=info)
 
-team = Team()
-coach = Coach()
-players = []
-
-def save_team_info():
-    team.team_name = team_name_entry.get()
-    team.team_code = team_code_entry.get()
-    team_name_entry.delete(0, tk.END)
-    team_code_entry.delete(0, tk.END)
-
-def save_coach_info():
-    coach.fname = coach_last_name_entry.get()
-    coach.birthdate = coach_dob_entry.get()
-    coach.idcode = coach_id_code_entry.get()
-    coach.card_type = coach_card_type_entry.get()
-    coach.team_ranking = team_rank_entry.get()
-    coach_last_name_entry.delete(0, tk.END)
-    coach_dob_entry.delete(0, tk.END)
-    coach_id_code_entry.delete(0, tk.END)
-    coach_card_type_entry.delete(0, tk.END)
-    team_rank_entry.delete(0, tk.END)
-
-def save_player_info():
-    player = Player()
-    player.fname = player_first_name_entry.get()
-    player.birthdate = player_birth_entry.get()
-    player.idcode = player_id_code_entry.get()
-    player.height = player_height_entry.get()
-    player.weight = player_weight_entry.get()
-    players.append(player)
-    player_first_name_entry.delete(0, tk.END)
-    player_birth_entry.delete(0, tk.END)
-    player_id_code_entry.delete(0, tk.END)
-    player_height_entry.delete(0, tk.END)
-    player_weight_entry.delete(0, tk.END)
-
-def display_team_info():
-    output = f"Team Name: {team.team_name}\n"
-    output += f"Team Code: {team.team_code}\n"
-    output += f"Coach Last Name: {coach.fname}\n"
-    output += f"Coach Date of Birth: {coach.birthdate}\n"
-    output += f"Coach ID Code: {coach.idcode}\n"
-    output += f"Coach Card Type: {coach.card_type}\n"
-    output += f"Team Rank: {coach.team_ranking}\n"
-    for i, player in enumerate(players):
-        output += f"\nPlayer {i+1}:\n"
-        output += f"Last Name: {player.last_name}\n"
-        output += f"Date of Birth: {player.birthdate}\n"
-        output += f"ID Code: {player.id_code}\n"
-        output += f"Height: {player.height}\n"
-        output += f"Weight: {player.weight}\n"
-    output_label.config(text=output)
-
-window = tk.Tk()
-window.title("Team Information")
-window.geometry("400x500")
-
-team_name_label = tk.Label(window, text="Team Name:")
-team_name_label.pack()
-team_name_entry = tk.Entry(window)
-team_name_entry.pack()
-
-team_code_label = tk.Label(window, text="Team Code:")
-team_code_label.pack()
-team_code_entry = tk.Entry(window)
-team_code_entry.pack()
-
-save_team_button = tk.Button(window, text="Save Team", command=save_team_info)
-save_team_button.pack()
-
-coach_last_name_label = tk.Label(window, text="Coach Last Name:")
-coach_last_name_label.pack()
-coach_last_name_entry = tk.Entry(window)
-coach_last_name_entry.pack()
-
-coach_dob_label = tk.Label(window, text="Coach Date of Birth:")
-coach_dob_label.pack()
-coach_dob_entry = tk.Entry(window)
-coach_dob_entry.pack()
-
-coach_id_code_label = tk.Label(window, text="Coach ID Code:")
-coach_id_code_label.pack()
-coach_id_code_entry = tk.Entry(window)
-coach_id_code_entry.pack()
-
-coach_card_type_label = tk.Label(window, text="Coach Card Type:")
-coach_card_type_label.pack()
-coach_card_type_entry = tk.Entry(window)
-coach_card_type_entry.pack()
-
-team_rank_label = tk.Label(window, text="Team Rank:")
-team_rank_label.pack()
-team_rank_entry = tk.Entry(window)
-team_rank_entry.pack()
-
-save_coach_button = tk.Button(window, text="Save Coach", command=save_coach_info)
-save_coach_button.pack()
-
-player_last_name_label = tk.Label(window, text="Player Last Name:")
-player_last_name_label.pack()
-player_first_name_entry = tk.Entry(window)
-player_first_name_entry.pack()
-
-player_dob_label = tk.Label(window, text="Player Date of Birth:")
-player_dob_label.pack()
-player_birth_entry = tk.Entry(window)
-player_birth_entry.pack()
-
-player_id_code_label = tk.Label(window, text="Player ID Code:")
-player_id_code_label.pack()
-player_id_code_entry = tk.Entry(window)
-player_id_code_entry.pack()
-
-player_height_label = tk.Label(window, text="Player Height:")
-player_height_label.pack()
-player_height_entry = tk.Entry(window)
-player_height_entry.pack()
-
-player_weight_label = tk.Label(window, text="Player Weight:")
-player_weight_label.pack()
-player_weight_entry = tk.Entry(window)
-player_weight_entry.pack()
-
-save_player_button = tk.Button(window, text="Save Player", command=save_player_info)
-save_player_button.pack()
-
-display_team_button = tk.Button(window, text="Display Team Information", command=display_team_info)
-display_team_button.pack()
-
-output_label = tk.Label(window, text="")
-output_label.pack()
-
-window.mainloop()
+# Create an instance of the GUI
+gui = TeamInfoGUI()
 
 
     
