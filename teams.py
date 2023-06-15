@@ -42,6 +42,41 @@ class Person:
         print("Birthdate:", self.birthdate)
 
 
+class Coach(Person):
+    def __init__(self):
+        super().__init__()
+        self.card_type = []
+
+    def read_card_and_ranking(self):
+        valid_cards = ["A", "B", "C"]
+        while True:
+            card = input("Enter the coaching card type (A/B/C): ")
+            if card.upper() in valid_cards:
+                self.card_type = card.upper()
+                break
+            else:
+                print("Invalid coaching card type. Please choose one of the following: A, B, C.")
+
+        self.team_ranking = int(input("Enter the team's ranking: "))
+
+    def show_card_type(self):
+        print("Card type:", self.card_type)
+    
+    def read_coach_info(self):
+        self.read_fname()
+        self.read_lname()
+        self.read_birthdate()
+        self.read_idcode()
+        self.read_card_and_ranking()
+    
+    def show_caoch_info(self):
+        super().show_fullname()
+        super().show_idcode()
+        super().show_birthdate()
+        print("Card Type: ", self.card_type)
+        print("ranking: ", self.team_ranking)
+
+
 
 class Player(Person):
     def __init__(self):
@@ -185,131 +220,6 @@ class Player(Person):
         #     print('Captain')
         
 
-    
-class PlayerGUI(tk.Tk):
-    def __init__(self):
-        super().__init__()
-
-        self.player = Player()
-
-        self.title("Player Information")
-        self.geometry("400x300")
-
-        player_name_label = tk.Label(self, text="Player Name:")
-        player_name_label.pack()
-        self.player_name_entry = tk.Entry(self)
-        self.player_name_entry.pack()
-
-        player_age_label = tk.Label(self, text="Player Age:")
-        player_age_label.pack()
-        self.player_age_entry = tk.Entry(self)
-        self.player_age_entry.pack()
-
-        player_position_label = tk.Label(self, text="Player Position:")
-        player_position_label.pack()
-        self.player_position_entry = tk.Entry(self)
-        self.player_position_entry.pack()
-
-        save_button = tk.Button(self, text="Save", command=self.save_player)
-        save_button.pack(pady=10)
-
-        display_button = tk.Button(self, text="Display", command=self.display_player)
-        display_button.pack()
-
-    def save_player(self):
-        name = self.player_name_entry.get()
-        age = int(self.player_age_entry.get())
-        position = self.player_position_entry.get()
-
-        self.player.set_name(name)
-        self.player.set_age(age)
-        self.player.set_position(position)
-
-        self.player_name_entry.delete(0, tk.END)
-        self.player_age_entry.delete(0, tk.END)
-        self.player_position_entry.delete(0, tk.END)
-
-        print("Player information saved.")
-
-    def display_player(self):
-        name = self.player.get_name()
-        age = self.player.get_age()
-        position = self.player.get_position()
-
-        print("Player Information:")
-        print(f"Name: {name}")
-        print(f"Age: {age}")
-        print(f"Position: {position}")
-
-
-class Player:
-    def __init__(self):
-        self.name = ""
-        self.age = 0
-        self.position = ""
-
-    def set_name(self, name):
-        self.name = name
-
-    def set_age(self, age):
-        self.age = age
-
-    def set_position(self, position):
-        self.position = position
-
-    def get_name(self):
-        return self.name
-
-    def get_age(self):
-        return self.age
-
-    def get_position(self):
-        return self.position
-
-
-if __name__ == "__main__":
-    player_app = PlayerGUI()
-    player_app.mainloop()
-
-
-
-
-class Coach(Person):
-    def __init__(self):
-        super().__init__()
-        self.card_type = []
-
-    def read_card_and_ranking(self):
-        valid_cards = ["A", "B", "C"]
-        while True:
-            card = input("Enter the coaching card type (A/B/C): ")
-            if card.upper() in valid_cards:
-                self.card_type = card.upper()
-                break
-            else:
-                print("Invalid coaching card type. Please choose one of the following: A, B, C.")
-
-        self.team_ranking = int(input("Enter the team's ranking: "))
-
-    def show_card_type(self):
-        print("Card type:", self.card_type)
-    
-    def read_coach_info(self):
-        self.read_fname()
-        self.read_lname()
-        self.read_birthdate()
-        self.read_idcode()
-        self.read_card_and_ranking()
-    
-    def show_caoch_info(self):
-        super().show_fullname()
-        super().show_idcode()
-        super().show_birthdate()
-        print("Card Type: ", self.card_type)
-        print("ranking: ", self.team_ranking)
-        
-
-
 
 class Team:
     MAX_PLAYERS_PER_TEAM = 11
@@ -428,61 +338,6 @@ class Team:
                 if player.is_foreign:
                     foreign_players_count += 1
             return foreign_players_count
-
-class TeamGUI(tk.Tk):
-    def __init__(self):
-        super().__init__()
-        self.title("Team Information")
-        self.geometry("400x400")
-
-        self.team = Team()
-
-        self.create_widgets()
-
-    def create_widgets(self):
-        self.display_all_teams_btn = tk.Button(self, text="read taem info", command=self.read_team_info)
-        self.display_all_teams_btn.pack(pady=5)
-
-        self.display_all_teams_btn = tk.Button(self, text="Display All Teams", command=self.display_all_teams)
-        self.display_all_teams_btn.pack(pady=5)
-
-        self.display_team_by_code_btn = tk.Button(self, text="Display Team by Code", command=self.display_team_by_code)
-        self.display_team_by_code_btn.pack(pady=5)
-
-        self.display_team_by_coach_btn = tk.Button(self, text="Display Team by Coach", command=self.display_team_by_coach)
-        self.display_team_by_coach_btn.pack(pady=5)
-
-        self.display_team_by_player_btn = tk.Button(self, text="Display Team by Player", command=self.display_team_by_player)
-        self.display_team_by_player_btn.pack(pady=5)
-
-    def read_team_info(self):
-        all_teams = self.team.read_team_info()
-        messagebox.showinfo("All Teams", all_teams)
-
-    def display_all_teams(self):
-        all_teams = self.team.display_all_teams()
-        messagebox.showinfo("All Teams", all_teams)
-
-    def display_team_by_code(self):
-        team_code = input("Enter the team code: ")
-        team_info = self.team.display_team_by_code(team_code)
-        messagebox.showinfo("Team Information", team_info)
-
-    def display_team_by_coach(self):
-        coach_name = input("Enter the coach name: ")
-        team_info = self.team.display_team_by_coach(coach_name)
-        messagebox.showinfo("Team Information", team_info)
-
-    def display_team_by_player(self):
-        player_name = input("Enter the player name: ")
-        team_info = self.team.display_team_by_player(player_name)
-        messagebox.showinfo("Team Information", team_info)
-
-if __name__ == "__main__":
-    team_gui = TeamGUI()
-    team_gui.mainloop()
-
-
 
 
 class League:
@@ -652,7 +507,42 @@ class League:
     #             nationalities.append(player.nationality)
     #         return nationalities
 
+
     
+import tkinter as tk
+
+class Team:
+    def __init__(self):
+        self.team_name = ""
+        self.team_code = ""
+
+class Coach:
+    def __init__(self):
+        self.last_name = ""
+        self.date_of_birth = ""
+        self.id_code = ""
+        self.card_type = ""
+        self.team_rank = ""
+
+class Player:
+    def __init__(self):
+        self.last_name = ""
+        self.date_of_birth = ""
+        self.id_code = ""
+        self.height = ""
+        self.weight = ""
+
+
+
+
+
+
+
+
+
+
+
+
 
     
 
