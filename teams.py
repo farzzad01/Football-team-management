@@ -630,35 +630,35 @@ class TeamInfoGUI:
         self.info_label.config(text=info)
 
     def display_all_teams(self):
-        # Logic to display all teams
+        league.display_all_teams()
         pass
 
     def display_team_by_code(self):
-        # Logic to display team by code
+        league.display_team_by_code()
         pass
 
     def display_team_by_coach(self):
-        # Logic to display team by coach
+        league.display_team_by_coach()
         pass
 
     def display_team_by_player(self):
-        # Logic to display team by player
+        league.display_team_by_player()
         pass
 
     def display_players_by_name(self):
-        # Logic to display players by name
+        league.display_players_by_name()
         pass
 
     def display_players_over_30(self):
-        # Logic to display players over 30
+        league.display_players_over_30()
         pass
 
     def display_coaches_with_teams(self):
-        # Logic to display coaches with teams
+        league.display_coaches_with_teams()
         pass
 
     def display_players_height(self):
-        # Logic to display players height
+        league.display_players_height()
         pass
 
     def run(self):
