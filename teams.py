@@ -630,8 +630,41 @@ team_rank_entry.pack()
 save_coach_button = tk.Button(window, text="Save Coach", command=save_coach_info)
 save_coach_button.pack()
 
+player_last_name_label = tk.Label(window, text="Player Last Name:")
+player_last_name_label.pack()
+player_last_name_entry = tk.Entry(window)
+player_last_name_entry.pack()
 
+player_dob_label = tk.Label(window, text="Player Date of Birth:")
+player_dob_label.pack()
+player_dob_entry = tk.Entry(window)
+player_dob_entry.pack()
 
+player_id_code_label = tk.Label(window, text="Player ID Code:")
+player_id_code_label.pack()
+player_id_code_entry = tk.Entry(window)
+player_id_code_entry.pack()
+
+player_height_label = tk.Label(window, text="Player Height:")
+player_height_label.pack()
+player_height_entry = tk.Entry(window)
+player_height_entry.pack()
+
+player_weight_label = tk.Label(window, text="Player Weight:")
+player_weight_label.pack()
+player_weight_entry = tk.Entry(window)
+player_weight_entry.pack()
+
+save_player_button = tk.Button(window, text="Save Player", command=save_player_info)
+save_player_button.pack()
+
+display_team_button = tk.Button(window, text="Display Team Information", command=display_team_info)
+display_team_button.pack()
+
+output_label = tk.Label(window, text="")
+output_label.pack()
+
+window.mainloop()
 
 
     
