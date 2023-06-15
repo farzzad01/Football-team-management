@@ -532,8 +532,27 @@ class Player:
         self.height = ""
         self.weight = ""
 
+team = Team()
+coach = Coach()
+players = []
 
+def save_team_info():
+    team.team_name = team_name_entry.get()
+    team.team_code = team_code_entry.get()
+    team_name_entry.delete(0, tk.END)
+    team_code_entry.delete(0, tk.END)
 
+def save_coach_info():
+    coach.last_name = coach_last_name_entry.get()
+    coach.date_of_birth = coach_dob_entry.get()
+    coach.id_code = coach_id_code_entry.get()
+    coach.card_type = coach_card_type_entry.get()
+    coach.team_rank = team_rank_entry.get()
+    coach_last_name_entry.delete(0, tk.END)
+    coach_dob_entry.delete(0, tk.END)
+    coach_id_code_entry.delete(0, tk.END)
+    coach_card_type_entry.delete(0, tk.END)
+    team_rank_entry.delete(0, tk.END)
 
 
 
