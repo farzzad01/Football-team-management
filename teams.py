@@ -536,14 +536,14 @@ def save_coach_info():
 
 def save_player_info():
     player = Player()
-    player.fname = player_last_name_entry.get()
-    player.birthdate = player_dob_entry.get()
+    player.fname = player_first_name_entry.get()
+    player.birthdate = player_birth_entry.get()
     player.idcode = player_id_code_entry.get()
     player.height = player_height_entry.get()
     player.weight = player_weight_entry.get()
     players.append(player)
-    player_last_name_entry.delete(0, tk.END)
-    player_dob_entry.delete(0, tk.END)
+    player_first_name_entry.delete(0, tk.END)
+    player_birth_entry.delete(0, tk.END)
     player_id_code_entry.delete(0, tk.END)
     player_height_entry.delete(0, tk.END)
     player_weight_entry.delete(0, tk.END)
@@ -558,7 +558,7 @@ def display_team_info():
     output += f"Team Rank: {coach.team_ranking}\n"
     for i, player in enumerate(players):
         output += f"\nPlayer {i+1}:\n"
-        output += f"Last Name: {player.fname}\n"
+        output += f"Last Name: {player.last_name}\n"
         output += f"Date of Birth: {player.birthdate}\n"
         output += f"ID Code: {player.id_code}\n"
         output += f"Height: {player.height}\n"
@@ -612,13 +612,13 @@ save_coach_button.pack()
 
 player_last_name_label = tk.Label(window, text="Player Last Name:")
 player_last_name_label.pack()
-player_last_name_entry = tk.Entry(window)
-player_last_name_entry.pack()
+player_first_name_entry = tk.Entry(window)
+player_first_name_entry.pack()
 
 player_dob_label = tk.Label(window, text="Player Date of Birth:")
 player_dob_label.pack()
-player_dob_entry = tk.Entry(window)
-player_dob_entry.pack()
+player_birth_entry = tk.Entry(window)
+player_birth_entry.pack()
 
 player_id_code_label = tk.Label(window, text="Player ID Code:")
 player_id_code_label.pack()
