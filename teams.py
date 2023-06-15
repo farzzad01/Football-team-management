@@ -585,8 +585,50 @@ def display_team_info():
         output += f"Weight: {player.weight}\n"
     output_label.config(text=output)
 
+window = tk.Tk()
+window.title("Team Information")
+window.geometry("400x500")
 
+team_name_label = tk.Label(window, text="Team Name:")
+team_name_label.pack()
+team_name_entry = tk.Entry(window)
+team_name_entry.pack()
 
+team_code_label = tk.Label(window, text="Team Code:")
+team_code_label.pack()
+team_code_entry = tk.Entry(window)
+team_code_entry.pack()
+
+save_team_button = tk.Button(window, text="Save Team", command=save_team_info)
+save_team_button.pack()
+
+coach_last_name_label = tk.Label(window, text="Coach Last Name:")
+coach_last_name_label.pack()
+coach_last_name_entry = tk.Entry(window)
+coach_last_name_entry.pack()
+
+coach_dob_label = tk.Label(window, text="Coach Date of Birth:")
+coach_dob_label.pack()
+coach_dob_entry = tk.Entry(window)
+coach_dob_entry.pack()
+
+coach_id_code_label = tk.Label(window, text="Coach ID Code:")
+coach_id_code_label.pack()
+coach_id_code_entry = tk.Entry(window)
+coach_id_code_entry.pack()
+
+coach_card_type_label = tk.Label(window, text="Coach Card Type:")
+coach_card_type_label.pack()
+coach_card_type_entry = tk.Entry(window)
+coach_card_type_entry.pack()
+
+team_rank_label = tk.Label(window, text="Team Rank:")
+team_rank_label.pack()
+team_rank_entry = tk.Entry(window)
+team_rank_entry.pack()
+
+save_coach_button = tk.Button(window, text="Save Coach", command=save_coach_info)
+save_coach_button.pack()
 
 
 
