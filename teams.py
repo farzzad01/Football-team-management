@@ -554,7 +554,36 @@ def save_coach_info():
     coach_card_type_entry.delete(0, tk.END)
     team_rank_entry.delete(0, tk.END)
 
+def save_player_info():
+    player = Player()
+    player.last_name = player_last_name_entry.get()
+    player.date_of_birth = player_dob_entry.get()
+    player.id_code = player_id_code_entry.get()
+    player.height = player_height_entry.get()
+    player.weight = player_weight_entry.get()
+    players.append(player)
+    player_last_name_entry.delete(0, tk.END)
+    player_dob_entry.delete(0, tk.END)
+    player_id_code_entry.delete(0, tk.END)
+    player_height_entry.delete(0, tk.END)
+    player_weight_entry.delete(0, tk.END)
 
+def display_team_info():
+    output = f"Team Name: {team.team_name}\n"
+    output += f"Team Code: {team.team_code}\n"
+    output += f"Coach Last Name: {coach.last_name}\n"
+    output += f"Coach Date of Birth: {coach.date_of_birth}\n"
+    output += f"Coach ID Code: {coach.id_code}\n"
+    output += f"Coach Card Type: {coach.card_type}\n"
+    output += f"Team Rank: {coach.team_rank}\n"
+    for i, player in enumerate(players):
+        output += f"\nPlayer {i+1}:\n"
+        output += f"Last Name: {player.last_name}\n"
+        output += f"Date of Birth: {player.date_of_birth}\n"
+        output += f"ID Code: {player.id_code}\n"
+        output += f"Height: {player.height}\n"
+        output += f"Weight: {player.weight}\n"
+    output_label.config(text=output)
 
 
 
