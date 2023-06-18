@@ -507,8 +507,6 @@ class League:
     #             nationalities.append(player.nationality)
     #         return nationalities
 
-
-
 import tkinter as tk
 
 class TeamInfoGUI:
@@ -630,8 +628,15 @@ class TeamInfoGUI:
         self.info_label.config(text=info)
 
     def display_all_teams(self):
-        league.display_all_teams()
-        pass
+        team_info = ""
+        for team in self.league.teams:
+            team_info += f"Team Name: {team.name}\nTeam Code: {team.code}\n\n"
+            team_info += f"Coach Name: {team.coach.first_name}\nLast Name: {team.coach.last_name}\nDate of Birth: {team.coach.date_of_birth}\nID Code: {team.coach.id_code}\nCard Type: {team.coach.card_type}\nRank: {team.coach.rank}\n\n"
+            team_info += "Players:\n"
+            for player in team.players:
+                team_info += f"Player Name: {player.first_name}\nLast Name: {player.last_name}\nDate of Birth: {player.date_of_birth}\nID Code: {player.id_code}\nPosition: {player.position}\n\n"
+            team_info += "----------------------------------------\n"
+        self.info_label.config(text=team_info)
 
     def display_team_by_code(self):
         league.display_team_by_code()
@@ -667,8 +672,6 @@ class TeamInfoGUI:
 if __name__ == "__main__":
     app = TeamInfoGUI()
     app.run()
-
-
 
 league = League()
 
