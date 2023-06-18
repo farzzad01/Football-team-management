@@ -639,8 +639,15 @@ class TeamInfoGUI:
         self.info_label.config(text=team_info)
 
     def display_team_by_code(self):
-        league.display_team_by_code()
-        pass
+        team_code = self.team_code_entry.get()
+        team = self.league.get_team_by_code(team_code)
+        if team is not None:
+            team_info = f"Team Name: {team.name}\nTeam Code: {team.code}\n\n"
+            team_info += f"Coach Name: {team.coach.first_name}\nLast Name: {team.coach.last_name}\nDate of Birth: {team.coach.date_of_birth}\nID Code: {team.coach.id_code}\nCard Type: {team.coach.card_type}\nRank: {team.coach.rank}\n\n"
+            team_info += "Players:\n"
+            for player in team.players:
+                team_info += f"Player Name: {player.first_name}\nLast Name: {player.last_name}\nDate of Birth: {player.date_of_birth}\nID Code: {player.id_code}\nPosition: {player.position}\n\n"
+            self.info_label.config(text=team_info)
 
     def display_team_by_coach(self):
         league.display_team_by_coach()
