@@ -608,8 +608,14 @@ class TeamInfoGUI:
     def show_team_info(self):
         team_name = self.team_name_entry.get()
         team_code = self.team_code_entry.get()
-        info = f"Team Name: {team_name}\nTeam Code: {team_code}"
-        self.info_label.config(text=info)
+
+        team_info = f"Team Name: {team_name}\nTeam Code: {team_code}"
+        self.teams.append(team_info)
+
+        self.team_name_entry.delete(0, tk.END)
+        self.team_code_entry.delete(0, tk.END)
+
+        self.info_label.config(text="Team information saved.")
 
     def show_coach_info(self):
         coach_name = self.coach_name_entry.get()
@@ -618,8 +624,18 @@ class TeamInfoGUI:
         coach_id = self.coach_id_entry.get()
         coach_card = self.coach_card_entry.get()
         coach_rank = self.coach_rank_entry.get()
-        info = f"Coach Name: {coach_name}\nLast Name: {coach_last_name}\nDate of Birth: {coach_dob}\nID Code: {coach_id}\nCard Type: {coach_card}\nRank: {coach_rank}"
-        self.info_label.config(text=info)
+
+        coach_info = f"Name: {coach_name}\nLast Name: {coach_last_name}\nDOB: {coach_dob}\nID: {coach_id}\nCard: {coach_card}\nRank: {coach_rank}"
+        self.coaches.append(coach_info)
+
+        self.coach_name_entry.delete(0, tk.END)
+        self.coach_last_name_entry.delete(0, tk.END)
+        self.coach_dob_entry.delete(0, tk.END)
+        self.coach_id_entry.delete(0, tk.END)
+        self.coach_card_entry.delete(0, tk.END)
+        self.coach_rank_entry.delete(0, tk.END)
+
+        self.info_label.config(text="Coach information saved.")
 
     def show_player_info(self):
         player_name = self.player_name_entry.get()
