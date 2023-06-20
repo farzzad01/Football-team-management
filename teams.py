@@ -665,55 +665,71 @@ class TeamInfoGUI:
         self.info_label.config(text="Player information saved.")
 
     def display_all_teams(self):
-        team_info = ""
-        for i, team in enumerate(self.teams, start=1):
-            team_info += f"Team {i}:\n"
-            team_info += f"Team Name: {team[0]}\nTeam Code: {team[1]}\n\n"
-            team_info += f"Coach Name: {self.coaches[i - 1][0]}\nLast Name: {self.coaches[i - 1][1]}\nDate of Birth: {self.coaches[i - 1][2]}\nID Code: {self.coaches[i - 1][3]}\nCard Type: {self.coaches[i - 1][4]}\nRank: {self.coaches[i - 1][5]}\n\n"
-            team_info += "Players:\n"
-            for player in self.players:
-                team_info += f"Player Name: {player[0]}\nLast Name: {player[1]}\nDate of Birth: {player[2]}\nID Code: {player[3]}\nPosition: {player[4]}\n\n"
-            team_info += "\n"
-
+        if self.teams:
+            team_info = "\n".join(self.teams)
+            self.info_label.config(text=team_info)
+        else:
+            self.info_label.config(text="No team information available.")
         self.info_label.config(text=team_info)
         
+
     def display_team_by_code(self):
         team_code = self.team_code_entry.get()
-        team = self.display_all_teams(team_code)
-        if team is not None:
-            team_info = f"Team Name: {team.name}\nTeam Code: {team.code}\n\n"
-            team_info += f"Coach Name: {team.coach.first_name}\nLast Name: {team.coach.last_name}\nDate of Birth: {team.coach.date_of_birth}\nID Code: {team.coach.id_code}\nCard Type: {team.coach.card_type}\nRank: {team.coach.rank}\n\n"
-            team_info += "Players:\n"
-            for player in team.players:
-                team_info += f"Player Name: {player.first_name}\nLast Name: {player.last_name}\nDate of Birth: {player.date_of_birth}\nID Code: {player.id_code}\nPosition: {player.position}\n\n"
-            self.info_label.config(text=team_info)
+        team_info = [team for team in self.teams if team_code in team]
+        if team_info:
+            team_info_str = "\n".join(team_info)
+            self.info_label.config(text=team_info_str)
+        else:
+            self.info_label.config(text="No team found with the provided code.")
 
-    # def display_team_by_coach(self):
-    #     coach_id = self.coach_id_entry.get()
-    #     team = self.league.get_team_by_coach(coach_id)
-    #     if team is not None:
-    #         team_info = f"Team Name: {team.name}\nTeam Code: {team.code}\n\n"
-    #         team_info += f"Coach Name: {team.coach.first_name}\nLast Name: {team.coach.last_name}\nDate of Birth: {team.coach.date_of_birth}\nID Code: {team.coach.id_code}\nCard Type: {team.coach.card_type}\nRank: {team.coach.rank}\n\n"
-    #         team_info += "Players:\n"
-    #         for player in team.players:
-    #             team_info += f"Player Name: {player.first_name}\nLast Name: {player.last_name}\nDate of Birth: {player.date_of_birth}\nID Code: {player.id_code}\nPosition: {player.position}\n\n"
-    #         self.info_label.config(text=team_info)
-    #         print('test')
-    #     else:
-    #         self.info_label.config(text="No team found with the given coach ID.")
+    def display_team_by_coach(self):
+        coach_name = self.coach_name_entry.get()
+        coach_info = [coach for coach in self.coaches if coach_name in coach]
+        if coach_info:
+            coach_info_str = "\n".join(coach_info)
+            self.info_label.config(text=coach_info_str)
+        else:
+            self.info_label.config(text="No coach found with the provided name.")
 
-    # def display_team_by_player(self):
-    #     player_id = self.player_id_entry.get()
-    #     team = self.league.get_team_by_player(player_id)
-    #     if team is not None:
-    #         team_info = f"Team Name: {team.name}\nTeam Code: {team.code}\n\n"
-    #         team_info += f"Coach Name: {team.coach.first_name}\nLast Name: {team.coach.last_name}\nDate of Birth: {team.coach.date_of_birth}\nID Code: {team.coach.id_code}\nCard Type: {team.coach.card_type}\nRank: {team.coach.rank}\n\n"
-    #         team_info += "Players:\n"
-    #         for player in team.players:
-    #             team_info += f"Player Name: {player.first_name}\nLast Name: {player.last_name}\nDate of Birth: {player.date_of_birth}\nID Code: {player.id_code}\nPosition: {player.position}\n\n"
-    #         self.info_label.config(text=team_info)
-    #     else:
-    #         self.info_label.config(text="No team found with the given player ID.")
+    def display_team_by_player(self):
+        player_name = self.player_name_entry.get()
+        player_info = [player for player in self.players if player_name in player]
+        if player_info:
+            player_info_str = "\n".join(player_info)
+            self.info_label.config(text=player_info_str)
+        else:
+            self.info_label.config(text="No player found with the provided name.")
+
+    def display_players_by_name(self):
+        if self.players:
+            sorted_players = sorted(self.players)
+            player_info = "\n".join(sorted_players)
+            self.info_label.config(text=player_info)
+        else:
+            self.info_label.config(text="No player information available.")
+
+    def display_players_over_30(self):
+        player_info = [player for player in self.players if "DOB: " in player and int(player.split("DOB: ")[-1]) > 30]
+        if player_info:
+            player_info_str = "\n".join(player_info)
+            self.info_label.config(text=player_info_str)
+        else:
+            self.info_label.config(text="No players over 30 found.")
+
+    def display_coaches_with_teams(self):
+        if self.coaches:
+            coach_info = "\n".join(self.coaches)
+            self.info_label.config(text=coach_info)
+        else:
+            self.info_label.config(text="No coach information available.")
+
+    def display_players_height(self):
+        player_info = [player for player in self.players if "Height: " in player]
+        if player_info:
+            player_info_str = "\n".join(player_info)
+            self.info_label.config(text=player_info_str)
+        else:
+            self.info_label.config(text="No player height information available.")
 
 
 
