@@ -1,5 +1,4 @@
 import tkinter as tk
-from tkinter import messagebox
 
 class Person:
     def __init__(self):
@@ -507,12 +506,14 @@ class League:
     #             nationalities.append(player.nationality)
     #         return nationalities
 
-import tkinter as tk
-
 class TeamInfoGUI:
     def __init__(self):
         self.window = tk.Tk()
         self.window.title("Team Information")
+
+        self.teams = []
+        self.coaches = []
+        self.players = []
 
         self.team_name_label = tk.Label(self.window, text="Team Name:")
         self.team_name_entry = tk.Entry(self.window)
@@ -548,6 +549,8 @@ class TeamInfoGUI:
         self.get_player_info_button = tk.Button(self.window, text="Get Player Info", command=self.show_player_info)
 
         self.info_label = tk.Label(self.window, text="")
+
+
 
         self.team_name_label.grid(row=0, column=0, sticky=tk.E)
         self.team_name_entry.grid(row=0, column=1)
@@ -627,20 +630,40 @@ class TeamInfoGUI:
         info = f"Player Name: {player_name}\nLast Name: {player_last_name}\nDate of Birth: {player_dob}\nID Code: {player_id}\nPosition: {player_position}"
         self.info_label.config(text=info)
 
+    def save_player_info(self):
+        player_name = self.player_name_entry.get()
+        player_last_name = self.player_last_name_entry.get()
+        player_dob = self.player_dob_entry.get()
+        player_id = self.player_id_entry.get()
+        player_position = self.player_position_entry.get()
+
+        player_info = f"Name: {player_name}\nLast Name: {player_last_name}\nDOB: {player_dob}\nID: {player_id}\nPosition: {player_position}"
+        self.players.append(player_info)
+
+        self.player_name_entry.delete(0, tk.END)
+        self.player_last_name_entry.delete(0, tk.END)
+        self.player_dob_entry.delete(0, tk.END)
+        self.player_id_entry.delete(0, tk.END)
+        self.player_position_entry.delete(0, tk.END)
+
+        self.info_label.config(text="Player information saved.")
+
     def display_all_teams(self):
         team_info = ""
-        for team in self.league.teams:
-            team_info += f"Team Name: {team.name}\nTeam Code: {team.code}\n\n"
-            team_info += f"Coach Name: {team.coach.first_name}\nLast Name: {team.coach.last_name}\nDate of Birth: {team.coach.date_of_birth}\nID Code: {team.coach.id_code}\nCard Type: {team.coach.card_type}\nRank: {team.coach.rank}\n\n"
+        for i, team in enumerate(self.teams, start=1):
+            team_info += f"Team {i}:\n"
+            team_info += f"Team Name: {team[0]}\nTeam Code: {team[1]}\n\n"
+            team_info += f"Coach Name: {self.coaches[i - 1][0]}\nLast Name: {self.coaches[i - 1][1]}\nDate of Birth: {self.coaches[i - 1][2]}\nID Code: {self.coaches[i - 1][3]}\nCard Type: {self.coaches[i - 1][4]}\nRank: {self.coaches[i - 1][5]}\n\n"
             team_info += "Players:\n"
-            for player in team.players:
-                team_info += f"Player Name: {player.first_name}\nLast Name: {player.last_name}\nDate of Birth: {player.date_of_birth}\nID Code: {player.id_code}\nPosition: {player.position}\n\n"
-            team_info += "----------------------------------------\n"
-        self.info_label.config(text=team_info)
+            for player in self.players:
+                team_info += f"Player Name: {player[0]}\nLast Name: {player[1]}\nDate of Birth: {player[2]}\nID Code: {player[3]}\nPosition: {player[4]}\n\n"
+            team_info += "\n"
 
+        self.info_label.config(text=team_info)
+        
     def display_team_by_code(self):
         team_code = self.team_code_entry.get()
-        team = self.league.get_team_by_code(team_code)
+        team = self.display_all_teams(team_code)
         if team is not None:
             team_info = f"Team Name: {team.name}\nTeam Code: {team.code}\n\n"
             team_info += f"Coach Name: {team.coach.first_name}\nLast Name: {team.coach.last_name}\nDate of Birth: {team.coach.date_of_birth}\nID Code: {team.coach.id_code}\nCard Type: {team.coach.card_type}\nRank: {team.coach.rank}\n\n"
@@ -649,29 +672,34 @@ class TeamInfoGUI:
                 team_info += f"Player Name: {player.first_name}\nLast Name: {player.last_name}\nDate of Birth: {player.date_of_birth}\nID Code: {player.id_code}\nPosition: {player.position}\n\n"
             self.info_label.config(text=team_info)
 
-    def display_team_by_coach(self):
-        league.display_team_by_coach()
-        pass
+    # def display_team_by_coach(self):
+    #     coach_id = self.coach_id_entry.get()
+    #     team = self.league.get_team_by_coach(coach_id)
+    #     if team is not None:
+    #         team_info = f"Team Name: {team.name}\nTeam Code: {team.code}\n\n"
+    #         team_info += f"Coach Name: {team.coach.first_name}\nLast Name: {team.coach.last_name}\nDate of Birth: {team.coach.date_of_birth}\nID Code: {team.coach.id_code}\nCard Type: {team.coach.card_type}\nRank: {team.coach.rank}\n\n"
+    #         team_info += "Players:\n"
+    #         for player in team.players:
+    #             team_info += f"Player Name: {player.first_name}\nLast Name: {player.last_name}\nDate of Birth: {player.date_of_birth}\nID Code: {player.id_code}\nPosition: {player.position}\n\n"
+    #         self.info_label.config(text=team_info)
+    #         print('test')
+    #     else:
+    #         self.info_label.config(text="No team found with the given coach ID.")
 
-    def display_team_by_player(self):
-        league.display_team_by_player()
-        pass
+    # def display_team_by_player(self):
+    #     player_id = self.player_id_entry.get()
+    #     team = self.league.get_team_by_player(player_id)
+    #     if team is not None:
+    #         team_info = f"Team Name: {team.name}\nTeam Code: {team.code}\n\n"
+    #         team_info += f"Coach Name: {team.coach.first_name}\nLast Name: {team.coach.last_name}\nDate of Birth: {team.coach.date_of_birth}\nID Code: {team.coach.id_code}\nCard Type: {team.coach.card_type}\nRank: {team.coach.rank}\n\n"
+    #         team_info += "Players:\n"
+    #         for player in team.players:
+    #             team_info += f"Player Name: {player.first_name}\nLast Name: {player.last_name}\nDate of Birth: {player.date_of_birth}\nID Code: {player.id_code}\nPosition: {player.position}\n\n"
+    #         self.info_label.config(text=team_info)
+    #     else:
+    #         self.info_label.config(text="No team found with the given player ID.")
 
-    def display_players_by_name(self):
-        league.display_players_by_name()
-        pass
 
-    def display_players_over_30(self):
-        league.display_players_over_30()
-        pass
-
-    def display_coaches_with_teams(self):
-        league.display_coaches_with_teams()
-        pass
-
-    def display_players_height(self):
-        league.display_players_height()
-        pass
 
     def run(self):
         self.window.mainloop()
@@ -680,51 +708,4 @@ if __name__ == "__main__":
     app = TeamInfoGUI()
     app.run()
 
-league = League()
-
-while True:
-    print("========== League Menu ==========")
-    print("1. Read team information")
-    print("2. Display all teams")
-    print("3. Display team by code")
-    print("4. Display team by coach")
-    print("5. Display team by player")
-    print("6. Display players by name")
-    print("7. Display players over 30")
-    print("8. Display coaches with teams")
-    print("9. Player statistics")
-    print("10. Player with most goals")
-    print("11. Player with most passes")
-    print("12. Player with most shots on goal")
-    print("13. Team with goalkeeper with most clean sheets")
-    print('14. display most violent team')
-    print('15. get player nationality')
-    print("0. Exit")
-
-    choice = input("Enter your choice: ")
-
-    if choice == "1":
-        league.read_team_info()
-    elif choice == "2":
-        league.display_all_teams()
-    elif choice == "3":
-        league.display_team_by_code()
-    elif choice == "4":
-        league.display_team_by_coach()
-    elif choice == "5":
-        league.display_team_by_player()
-    elif choice == "6":
-        league.display_players_by_name()
-    elif choice == "7":
-        league.display_players_over_30()
-    elif choice == "8":
-        league.display_coaches_with_teams()
-    elif choice == "9":
-        league.display_players_height()
-    
-    elif choice == "0":
-        print("Exiting the program.")
-        break
-    else:
-        print("Invalid choice. Please try again.\n")
 
